@@ -1,0 +1,11 @@
+{
+  "DS1307": "makecode DS1307 RTC Package.\r\nFrom microbit/micropython Chinese community.\r\nhttp://www.micropython.org.cn\r\n\r\nDS1307 block",
+  "DS1307.DateTime": "set Date and Time",
+  "DS1307.DateTime|param|day": "is the Day will be set, eg: 15",
+  "DS1307.DateTime|param|hour": "is the Hour will be set, eg: 0",
+  "DS1307.DateTime|param|minute": "is the Minute will be set, eg: 0",
+  "DS1307.DateTime|param|month": "is the Month will be set, eg: 2",
+  "DS1307.DateTime|param|second": "is the Second will be set, eg: 0",
+  "DS1307.DateTime|param|weekday": "is the Weekday will be set, eg: 4",
+  "DS1307.DateTime|param|year": "is the Year will be set, eg: 2018"
+}

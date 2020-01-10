@@ -1,0 +1,14 @@
+{
+  "DS1307.Data_Unit.Day|block": "日",
+  "DS1307.Data_Unit.Hour|block": "时",
+  "DS1307.Data_Unit.Minute|block": "分",
+  "DS1307.Data_Unit.Month|block": "月",
+  "DS1307.Data_Unit.Second|block": "秒",
+  "DS1307.Data_Unit.Weekday|block": "星期",
+  "DS1307.Data_Unit.Year|block": "年",
+  "DS1307.DateTime|block": "设置 年 %year|月 %month|日 %day|星期 %weekday|时 %hour|分 %minute|秒 %second",
+  "DS1307.readData|block": "%data",
+  "DS1307.setData|block": "设置 %data | %num",
+  "DS1307|block": "实时时钟",
+  "{id:category}DS1307": "实时时钟"
+}

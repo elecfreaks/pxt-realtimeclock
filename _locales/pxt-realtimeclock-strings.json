@@ -1,0 +1,14 @@
+{
+  "DS1307.Data_Unit.Day|block": "Day",
+  "DS1307.Data_Unit.Hour|block": "Hour",
+  "DS1307.Data_Unit.Minute|block": "Minute",
+  "DS1307.Data_Unit.Month|block": "Month",
+  "DS1307.Data_Unit.Second|block": "Second",
+  "DS1307.Data_Unit.Weekday|block": "Weekday",
+  "DS1307.Data_Unit.Year|block": "Year",
+  "DS1307.DateTime|block": "set year %year|month %month|day %day|weekday %weekday|hour %hour|minute %minute|second %second",
+  "DS1307.readData|block": "%data",
+  "DS1307.setData|block": "set %data | %num",
+  "DS1307|block": "RTC",
+  "{id:category}DS1307": "DS1307"
+}

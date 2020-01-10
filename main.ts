@@ -80,7 +80,8 @@ namespace DS1307 {
     export function getSecond(): number {
         return Math.min(HexToDec(getReg(DS1307_REG_SECOND)), 59)
     }
-// block="%data"
+    //% blockID="get_all_data"
+    // block="%data"
     export function getData(data: Data_Unit):number{
         switch (data) {
             case Data_Unit.Year:

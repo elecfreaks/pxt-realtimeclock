@@ -83,7 +83,6 @@ namespace DS1307 {
 
 
     //% blockID="get_all_data"
-    //% weight=60
     //% block="%data"
     export function readData(data: Data_Unit):number{
         switch (data) {
@@ -158,7 +157,7 @@ namespace DS1307 {
      * @param second is the Second will be set, eg: 0
      */
     //% blockId="DS1307_SET_DATETIME" block="set year %year|month %month|day %day|weekday %weekday|hour %hour|minute %minute|second %second"
-    //% weight=60 blockGap
+    //% weight=1 blockGap
     //% parts=DS1307 trackArgs=0
     export function DateTime(year: number, month: number, day: number, weekday: number, hour: number, minute: number, second: number): void {
         let buf = pins.createBuffer(8);

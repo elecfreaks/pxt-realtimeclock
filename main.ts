@@ -80,7 +80,37 @@ namespace DS1307 {
     export function getSecond(): number {
         return Math.min(HexToDec(getReg(DS1307_REG_SECOND)), 59)
     }
-
+    
+    //% blockID="set_all_data"
+    //% block="set %data | %num"
+    export function setData(data: Data_Unit, num: number): void {
+        switch (data) {
+            case Data_Unit.Year:
+                setReg(DS1307_REG_YEAR, DecToHex(num % 100));
+                break;
+            case Data_Unit.Month:
+                setReg(DS1307_REG_MONTH, DecToHex(num % 13));
+                break;
+            case Data_Unit.Day:
+                setReg(DS1307_REG_DAY, DecToHex(num % 32));
+                break;
+            case Data_Unit.Weekday:
+                setReg(DS1307_REG_WEEKDAY, DecToHex(num % 8))
+                break;
+            case Data_Unit.Hour:
+                setReg(DS1307_REG_HOUR, DecToHex(num % 24));
+                break;
+            case Data_Unit.Minute:
+                setReg(DS1307_REG_MINUTE, DecToHex(num % 60));
+                break;
+            case Data_Unit.Second:
+                setReg(DS1307_REG_SECOND, DecToHex(num % 60))
+                break;
+            default:
+                break;
+        }
+        start();
+    }
 
     //% blockID="get_all_data"
     //% block="%data"
@@ -112,38 +142,6 @@ namespace DS1307 {
                 
         }
     }
-    //% blockID="set_all_data"
-    //% block="set %data | %num"
-    export function setData(data:Data_Unit,num:number):void{
-        switch(data){
-            case Data_Unit.Year:
-                setReg(DS1307_REG_YEAR, DecToHex(num % 100));
-                break;
-            case Data_Unit.Month:
-                setReg(DS1307_REG_MONTH, DecToHex(num % 13));
-                break;
-            case Data_Unit.Day:
-                setReg(DS1307_REG_DAY, DecToHex(num % 32));
-                break;
-            case Data_Unit.Weekday:
-                setReg(DS1307_REG_WEEKDAY, DecToHex(num % 8))
-                break;
-            case Data_Unit.Hour:
-                setReg(DS1307_REG_HOUR, DecToHex(num % 24));
-                break;
-            case Data_Unit.Minute:
-                setReg(DS1307_REG_MINUTE, DecToHex(num % 60));
-                break;
-            case Data_Unit.Second:
-                setReg(DS1307_REG_SECOND, DecToHex(num % 60))
-                break;
-            default:
-                break;
-        }
-        start();
-    }
-
-
 
 
     /**

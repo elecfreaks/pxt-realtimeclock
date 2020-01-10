@@ -20,6 +20,25 @@ namespace DS1307 {
     let DS1307_REG_CTRL = 7
     let DS1307_REG_RAM = 8
 
+    export enum Data_Unit {
+        //% block="Year"
+        Year,
+
+        //% block="Month"
+        Month,
+
+        //% block="Day"
+        Day,
+        //% block="Weekday"
+        Weekday,
+        //% block="Hour"
+        Hour,
+        //% block="Minute"
+        Minute,
+        //% block="Second"
+        Second
+
+    }
     /**
      * set ds1307's reg
      */
@@ -73,7 +92,9 @@ namespace DS1307 {
         let t = getSecond()
         setSecond(t | 0x80)
     }
-
+    export function setSecond(dat: number): void {
+        setReg(DS1307_REG_SECOND, DecToHex(dat % 60))
+    }
     /**
      * get Year
      */
@@ -84,16 +105,6 @@ namespace DS1307 {
         return Math.min(HexToDec(getReg(DS1307_REG_YEAR)), 99) + 2000
     }
 
-    /**
-     * set year
-     * @param dat is the Year will be set, eg: 2018
-     */
-    //% blockId="DS1307_SET_YEAR" block="set year %dat"
-    //% weight=69 blockGap=8
-    //% parts=DS1307 trackArgs=0
-    export function setYear(dat: number): void {
-        setReg(DS1307_REG_YEAR, DecToHex(dat % 100))
-    }
 
     /**
      * get Month
@@ -105,17 +116,6 @@ namespace DS1307 {
         return Math.max(Math.min(HexToDec(getReg(DS1307_REG_MONTH)), 12), 1)
     }
 
-    /**
-     * set month
-     * @param dat is Month will be set.  eg: 2
-     */
-    //% blockId="DS1307_SET_MONTH" block="set month %dat"
-    //% weight=68 blockGap=8
-    //% dat.min=1 dat.max=12
-    //% parts=DS1307 trackArgs=0
-    export function setMonth(dat: number): void {
-        setReg(DS1307_REG_MONTH, DecToHex(dat % 13))
-    }
 
     /**
      * get Day
@@ -127,17 +127,7 @@ namespace DS1307 {
         return Math.max(Math.min(HexToDec(getReg(DS1307_REG_DAY)), 31), 1)
     }
 
-    /**
-     * set day
-     * @param dat is the Day will be set, eg: 15
-     */
-    //% blockId="DS1307_SET_DAY" block="set day %dat"
-    //% weight=67 blockGap=8
-    //% dat.min=1 dat.max=31
-    //% parts=DS1307 trackArgs=0
-    export function setDay(dat: number): void {
-        setReg(DS1307_REG_DAY, DecToHex(dat % 32))
-    }
+
 
     /**
      * get Week Day
@@ -149,17 +139,7 @@ namespace DS1307 {
         return Math.max(Math.min(HexToDec(getReg(DS1307_REG_WEEKDAY)), 7), 1)
     }
 
-    /**
-     * set weekday
-     * @param dat is the Week Day will be set, eg: 4
-     */
-    //% blockId="DS1307_SET_WEEKDAY" block="set weekday %dat"
-    //% weight=66 blockGap=8
-    //% dat.min=1 dat.max=7
-    //% parts=DS1307 trackArgs=0
-    export function setWeekday(dat: number): void {
-        setReg(DS1307_REG_WEEKDAY, DecToHex(dat % 8))
-    }
+
 
     /**
      * get Hour
@@ -171,17 +151,7 @@ namespace DS1307 {
         return Math.min(HexToDec(getReg(DS1307_REG_HOUR)), 23)
     }
 
-    /**
-     * set hour
-     * @param dat is the Hour will be set, eg: 0
-     */
-    //% blockId="DS1307_SET_HOUR" block="set hour %dat"
-    //% weight=65 blockGap=8
-    //% dat.min=0 dat.max=23
-    //% parts=DS1307 trackArgs=0
-    export function setHour(dat: number): void {
-        setReg(DS1307_REG_HOUR, DecToHex(dat % 24))
-    }
+
 
     /**
      * get Minute
@@ -192,19 +162,36 @@ namespace DS1307 {
     export function getMinute(): number {
         return Math.min(HexToDec(getReg(DS1307_REG_MINUTE)), 59)
     }
+    //% blockID="set_all_data"
+    //% block="set %data | %num"
+    export function setData(data:Data_Unit,num:number):void{
+        switch(data){
+            case Data_Unit.Year:
+                setReg(DS1307_REG_YEAR, DecToHex(num % 100));
+                break;
+            case Data_Unit.Month:
+                setReg(DS1307_REG_MONTH, DecToHex(num % 13));
+                break;
+            case Data_Unit.Day:
+                setReg(DS1307_REG_DAY, DecToHex(num % 32));
+                break;
+            case Data_Unit.Weekday:
+                setReg(DS1307_REG_WEEKDAY, DecToHex(num % 8))
+                break;
+            case Data_Unit.Hour:
+                setReg(DS1307_REG_HOUR, DecToHex(num % 24));
+                break;
+            case Data_Unit.Minute:
+                setReg(DS1307_REG_MINUTE, DecToHex(num % 60));
+                break;
+            case Data_Unit.Second:
+                setReg(DS1307_REG_SECOND, DecToHex(num % 60))
+                break;
+            default:
+                break;
 
-    /**
-     * set minute
-     * @param dat is the Minute will be set, eg: 0
-     */
-    //% blockId="DS1307_SET_MINUTE" block="set minute %dat"
-    //% weight=64 blockGap=8
-    //% dat.min=0 dat.max=59
-    //% parts=DS1307 trackArgs=0
-    export function setMinute(dat: number): void {
-        setReg(DS1307_REG_MINUTE, DecToHex(dat % 60))
+        }
     }
-
     /**
      * get Second
      */
@@ -215,17 +202,7 @@ namespace DS1307 {
         return Math.min(HexToDec(getReg(DS1307_REG_SECOND)), 59)
     }
 
-    /**
-     * set second
-     * @param dat is the Second will be set, eg: 0
-     */
-    //% blockId="DS1307_SET_SECOND" block="set second %dat"
-    //% weight=63 blockGap
-    //% dat.min=0 dat.max=59
-    //% parts=DS1307 trackArgs=0
-    export function setSecond(dat: number): void {
-        setReg(DS1307_REG_SECOND, DecToHex(dat % 60))
-    }
+
 
     /**
      * set Date and Time
